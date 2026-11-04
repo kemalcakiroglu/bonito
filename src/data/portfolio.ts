@@ -51,6 +51,36 @@ const portfolio: PortfolioItem[] = [
     href: "https://www.instagram.com/eugastropack/",
     linkLabel: "@eugastropack",
   },
+  {
+    id: "basricakiroglu",
+    title: "Prof. Dr. Basri Çakıroğlu",
+    category: "Kişisel Web Sitesi",
+    description:
+      "İstanbul'da üroloji ve robotik cerrahi uzmanı Prof. Dr. Basri Çakıroğlu için randevu formlu web sitesi.",
+    image: "/assets/portfolio/basricakiroglu.jpg",
+    href: "https://www.basricakiroglu.com.tr/",
+    linkLabel: "basricakiroglu.com.tr",
+  },
+  {
+    id: "skinsimulator",
+    title: "Skin Simulator",
+    category: "Web Uygulaması",
+    description:
+      "Kasa açma ve trade-up deneyimini gerçek para olmadan tarayıcıda sunan ücretsiz simülatör.",
+    image: "/assets/portfolio/skinsimulator.jpg",
+    href: "https://skinsimulator.com/",
+    linkLabel: "skinsimulator.com",
+  },
+  {
+    id: "chestsimulator",
+    title: "Chest Simulator",
+    category: "Web Oyunu",
+    description:
+      "Tarayıcıda hesap açmadan oynanan, hayran yapımı ücretsiz sandık açma ve koleksiyon oyunu.",
+    image: "/assets/portfolio/chestsimulator.jpg",
+    href: "https://chestsimulator.com/",
+    linkLabel: "chestsimulator.com",
+  },
 ];
 
 export default portfolio;

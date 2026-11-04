@@ -9,7 +9,7 @@ const PortfolioSection = () => {
       <SectionHeader
         id="portfolio"
         title="Projeler"
-        desc="Birlikte çalıştığımız markalar için yaptıklarımız."
+        desc="Markalar ve kendi ürünlerimiz için yaptıklarımız."
         className="static mb-14"
       />
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
