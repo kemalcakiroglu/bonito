@@ -17,9 +17,14 @@ const links: Link[] = [
     thumbnail: '/assets/nav/process.png'
   },
   {
-    title: 'Neler Üretiyoruz',
+    title: 'Çözümler',
     href: '/#projects',
     thumbnail: '/assets/nav/work.png'
+  },
+  {
+    title: 'Projeler',
+    href: '/#portfolio',
+    thumbnail: '/assets/nav/portfolio.png'
   },
   {
     title: 'İletişim',

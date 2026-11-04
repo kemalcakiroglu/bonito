@@ -35,7 +35,7 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
   const playSound = useKeyboardSounds();
   const scene = useMemo(() => createKeyboardScene(Object.values(SKILLS).map((skill) => ({
     ...skill, icon: skill.keyboardIcon ?? skill.icon,
-  }))), []);
+  })), 4), []);
   const { settings: graphics, markActive } = useAdaptiveGraphics(ready && !isLoading);
   const { shadows, softShadows, ao, bloom, lighting } = graphics;
   const environment = useMemo(() => ({

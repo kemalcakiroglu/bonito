@@ -52,8 +52,10 @@ Güvenlik ve önbellek başlıkları `public/_headers`, iletişim formu
 |---|---|
 | `src/data/config.ts` | Ad, e-posta, alan adı, sosyal medya, SEO metinleri |
 | `src/data/constants.ts` | Hizmetler (3B klavye tuşları), süreç adımları |
-| `src/data/projects.ts` | "Neler Üretiyoruz" kartları |
-| `public/assets/work/` | Kart görselleri |
+| `src/data/projects.ts` | "Çözümler" kartları (hizmet kategorileri) |
+| `src/data/portfolio.ts` | "Projeler" bölümü (gerçek işler) |
+| `public/assets/portfolio/` | Proje görselleri (3:2) |
+| `public/assets/work/` | Çözüm kartı görselleri |
 | `public/assets/services/` | Hizmet ikonları (renkli, HTML ızgarası) |
 | `public/assets/keyboard/logos/` | Hizmet ikonları (beyaz, 3B tuşlar) |
 

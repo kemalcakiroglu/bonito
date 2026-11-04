@@ -19,8 +19,8 @@ import ScrollingPreview from "../scrolling-preview";
 const ProjectsSection = () => {
   return (
     <SectionWrapper id="projects" className="max-w-7xl mx-auto md:min-h-[130vh] px-4">
-      <SectionHeader id="projects" title="Neler Üretiyoruz" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <SectionHeader id="projects" title="Çözümler" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
@@ -63,7 +63,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           </div>
         </ResponsiveDialogTrigger>
 
-        <ResponsiveDialogContent className="md:max-w-4xl md:h-[85vh] md:!flex md:flex-col md:overflow-hidden md:p-0 md:gap-0">
+        <ResponsiveDialogContent className="md:max-w-2xl md:h-[420px] md:!flex md:flex-col md:overflow-hidden md:p-0 md:gap-0">
           {/* Sticky header */}
           <div className="shrink-0 border-b border-border bg-background/80 backdrop-blur-sm px-8 py-5">
             <div className="flex items-center justify-between gap-4">

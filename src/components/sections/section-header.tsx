@@ -11,7 +11,8 @@ export const SectionHeader = ({ id, title, desc, className }: { id: string, titl
         <BoxReveal width="100%">
           <h2
             className={cn(
-              "text-4xl text-center md:text-7xl font-bold",
+              // BoxReveal overflow:hidden: dar satırda İ noktası ve Ç/Ş çengeli kesilir
+              "text-4xl text-center md:text-7xl font-bold leading-[1.2] md:leading-[1.2]",
               "text-foreground"
             )}
           >

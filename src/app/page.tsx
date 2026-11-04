@@ -7,6 +7,7 @@ import AnimatedBackground from "@/components/animated-background";
 import SkillsSection from "@/components/sections/skills";
 import ProcessSection from "@/components/sections/process";
 import ProjectsSection from "@/components/sections/projects";
+import PortfolioSection from "@/components/sections/portfolio";
 import ContactSection from "@/components/sections/contact";
 import HeroSection from "@/components/sections/hero";
 
@@ -19,6 +20,7 @@ function MainPage() {
         <SkillsSection />
         <ProcessSection />
         <ProjectsSection />
+        <PortfolioSection />
         <ContactSection />
       </main>
     </SmoothScroll>

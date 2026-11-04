@@ -1,17 +1,13 @@
-// order = keycap layout, 6 per row
+// order = keycap layout, 4 per row (see keyboard-scene.tsx)
 export enum SkillNames {
-  STRATEGY = "strategy",
-  BRAND = "brand",
-  CREATIVE = "creative",
-  COPY = "copy",
-  VIDEO = "video",
-  PHOTO = "photo",
-  SOCIAL = "social",
-  ADS = "ads",
-  MEDIA = "media",
-  SEO = "seo",
   WEB = "web",
-  ANALYTICS = "analytics",
+  UX = "ux",
+  SOCIAL = "social",
+  CONTENT = "content",
+  META = "meta",
+  GOOGLE = "google",
+  SEO = "seo",
+  INFLUENCER = "influencer",
 }
 export type Skill = {
   id: number;
@@ -57,18 +53,14 @@ const service = (
 });
 
 export const SKILLS: Record<SkillNames, Skill> = {
-  [SkillNames.STRATEGY]: service(1, SkillNames.STRATEGY, "Strateji", "Pazarı ve hedef kitleyi okuyup yol haritası çıkarırız.", CORAL, CORAL),
-  [SkillNames.BRAND]: service(2, SkillNames.BRAND, "Marka", "İsimden görsel kimliğe markanın dilini kurarız.", AMBER, NAVY),
-  [SkillNames.CREATIVE]: service(3, SkillNames.CREATIVE, "Kreatif", "Kalabalıkta fark edilen kampanya fikirleri üretiriz.", TEAL, TEAL),
-  [SkillNames.COPY]: service(4, SkillNames.COPY, "Metin", "Sloganlardan site metinlerine markanın sesini yazarız.", BLUE, NAVY),
-  [SkillNames.VIDEO]: service(5, SkillNames.VIDEO, "Video", "Reklam filmi ve kısa video içerikleri üretiriz.", CORAL, NAVY),
-  [SkillNames.PHOTO]: service(6, SkillNames.PHOTO, "Foto", "Ürün ve marka çekimlerini planlayıp hayata geçiririz.", AMBER, AMBER),
-  [SkillNames.SOCIAL]: service(7, SkillNames.SOCIAL, "Sosyal Medya", "İçerik takvimi, üretim ve topluluk yönetimi yaparız.", TEAL, NAVY),
-  [SkillNames.ADS]: service(8, SkillNames.ADS, "Reklam", "Dijital reklam kampanyalarını kurar ve yönetiriz.", BLUE, BLUE),
-  [SkillNames.MEDIA]: service(9, SkillNames.MEDIA, "Medya Plan", "Bütçenizi doğru kanala ve doğru zamana dağıtırız.", CORAL, NAVY),
-  [SkillNames.SEO]: service(10, SkillNames.SEO, "SEO", "Markanın aramalarda bulunmasını sağlayacak işleri yaparız.", AMBER, NAVY),
-  [SkillNames.WEB]: service(11, SkillNames.WEB, "Web", "Marka siteleri ve kampanya sayfaları tasarlarız.", TEAL, NAVY),
-  [SkillNames.ANALYTICS]: service(12, SkillNames.ANALYTICS, "Analitik", "Sonuçları ölçer, kararları veriye göre veririz.", BLUE, CORAL),
+  [SkillNames.WEB]: service(1, SkillNames.WEB, "Web Sitesi", "Kurumsal site, e-ticaret ve landing page kuruyoruz.", TEAL, TEAL),
+  [SkillNames.UX]: service(2, SkillNames.UX, "UI/UX", "Arayüzü iyileştiriyor, teknik bakımı üstleniyoruz.", TEAL, NAVY),
+  [SkillNames.SOCIAL]: service(3, SkillNames.SOCIAL, "Sosyal Medya", "Topluluğunuzu ve içerik takviminizi yönetiyoruz.", AMBER, AMBER),
+  [SkillNames.CONTENT]: service(4, SkillNames.CONTENT, "Kreatif", "Reels/TikTok, statik tasarım ve metin üretiyoruz.", AMBER, NAVY),
+  [SkillNames.META]: service(5, SkillNames.META, "Meta Ads", "Facebook ve Instagram reklamlarınızı yönetiyoruz.", CORAL, CORAL),
+  [SkillNames.GOOGLE]: service(6, SkillNames.GOOGLE, "Google Ads", "Arama, alışveriş ve görüntülü reklamlar kuruyoruz.", CORAL, NAVY),
+  [SkillNames.SEO]: service(7, SkillNames.SEO, "SEO", "Arama motorlarında organik görünürlük kazandırıyoruz.", BLUE, BLUE),
+  [SkillNames.INFLUENCER]: service(8, SkillNames.INFLUENCER, "Influencer", "KOL ve içerik üreticileriyle iş birlikleri kuruyoruz.", BLUE, NAVY),
 };
 
 export type ProcessStep = {
@@ -88,7 +80,7 @@ export const PROCESS: ProcessStep[] = [
       "Markanızı, rakiplerinizi ve hedef kitlenizi birlikte inceleriz.",
       "Başarının neye göre ölçüleceğini en baştan belirleriz.",
     ],
-    skills: [SkillNames.STRATEGY, SkillNames.ANALYTICS],
+    skills: [SkillNames.SEO, SkillNames.UX],
   },
   {
     id: 2,
@@ -98,7 +90,7 @@ export const PROCESS: ProcessStep[] = [
       "Ana mesajı, kanalları ve bütçe dağılımını planlarız.",
       "Takvimi ve sorumlulukları tek bir planda toplarız.",
     ],
-    skills: [SkillNames.STRATEGY, SkillNames.BRAND, SkillNames.MEDIA],
+    skills: [SkillNames.META, SkillNames.GOOGLE, SkillNames.SOCIAL],
   },
   {
     id: 3,
@@ -108,7 +100,7 @@ export const PROCESS: ProcessStep[] = [
       "Görsel, metin ve videoları aynı dille üretiriz.",
       "İşleri yayın öncesinde onayınıza sunarız.",
     ],
-    skills: [SkillNames.CREATIVE, SkillNames.COPY, SkillNames.VIDEO, SkillNames.PHOTO],
+    skills: [SkillNames.CONTENT, SkillNames.WEB, SkillNames.INFLUENCER],
   },
   {
     id: 4,
@@ -118,7 +110,7 @@ export const PROCESS: ProcessStep[] = [
       "Kampanyayı planlanan kanallarda yayına alırız.",
       "Sonuçları raporlar, öğrendiklerimizle sonraki adımı iyileştiririz.",
     ],
-    skills: [SkillNames.ADS, SkillNames.SOCIAL, SkillNames.ANALYTICS],
+    skills: [SkillNames.META, SkillNames.GOOGLE, SkillNames.SEO],
   },
 ];
 
