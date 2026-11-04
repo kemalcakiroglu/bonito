@@ -81,6 +81,36 @@ const portfolio: PortfolioItem[] = [
     href: "https://chestsimulator.com/",
     linkLabel: "chestsimulator.com",
   },
+  {
+    id: "potu",
+    title: "POTÜ Design Studio",
+    category: "Kurumsal Web Sitesi",
+    description:
+      "Mutfak, banyo, yaşam alanı ve mağaza projeleri yapan tasarım stüdyosu POTÜ için web sitesi.",
+    image: "/assets/portfolio/potu.jpg",
+    href: "https://www.xn--pot-joa.com/",
+    linkLabel: "potü.com",
+  },
+  {
+    id: "potudesign",
+    title: "POTÜ Design",
+    category: "Sosyal Medya Yönetimi",
+    description:
+      "Kişiye özel ahşap ve dekorasyon çözümleri sunan POTÜ Design'ın Instagram hesabının yönetimi.",
+    image: "/assets/portfolio/potudesign.jpg",
+    href: "https://www.instagram.com/potudesign/",
+    linkLabel: "@potudesign",
+  },
+  {
+    id: "enesozdemir",
+    title: "Enes Özdemir",
+    category: "Kişisel Web Sitesi",
+    description:
+      "Oyuncu Enes Özdemir için biyografi, kariyer, showreel ve galeri içeren kişisel web sitesi.",
+    image: "/assets/portfolio/enesozdemir.jpg",
+    href: "https://enesozdemir.tr/",
+    linkLabel: "enesozdemir.tr",
+  },
 ];
 
 export default portfolio;

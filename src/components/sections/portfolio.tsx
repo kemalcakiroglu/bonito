@@ -5,7 +5,9 @@ import SectionWrapper from "../ui/section-wrapper";
 
 const PortfolioSection = () => {
   return (
-    <SectionWrapper id="portfolio" className="max-w-7xl mx-auto px-4 py-24">
+    <SectionWrapper id="portfolio" className="relative bg-background px-4 py-24">
+      {/* opak zemin: başlık sabit 3B klavyenin üstüne binmesin */}
+      <div className="mx-auto max-w-7xl">
       <SectionHeader
         id="portfolio"
         title="Projeler"
@@ -47,6 +49,7 @@ const PortfolioSection = () => {
           </li>
         ))}
       </ul>
+      </div>
     </SectionWrapper>
   );
 };
