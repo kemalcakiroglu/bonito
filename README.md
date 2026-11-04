@@ -55,7 +55,6 @@ Güvenlik ve önbellek başlıkları `public/_headers`, iletişim formu
 | `src/data/projects.ts` | "Çözümler" kartları (hizmet kategorileri) |
 | `src/data/portfolio.ts` | "Projeler" bölümü (gerçek işler) |
 | `public/assets/portfolio/` | Proje görselleri (3:2) |
-| `public/assets/work/` | Çözüm kartı görselleri |
 | `public/assets/services/` | Hizmet ikonları (renkli, HTML ızgarası) |
 | `public/assets/keyboard/logos/` | Hizmet ikonları (beyaz, 3B tuşlar) |
 
