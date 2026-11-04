@@ -16,12 +16,12 @@ corepack pnpm install
 corepack pnpm dev
 ```
 
-`pnpm dev` iletişim formunu çalıştırmaz, çünkü form Cloudflare Function'dır.
+`pnpm dev` iletişim formunu çalıştırmaz, çünkü form Cloudflare Worker'ındadır.
 Formla birlikte denemek için `.dev.vars` dosyasına `RESEND_API_KEY` yazın:
 
 ```bash
 corepack pnpm build
-corepack pnpm dlx wrangler pages dev out
+corepack pnpm dlx wrangler dev
 ```
 
 Kontroller:
@@ -31,20 +31,20 @@ corepack pnpm lint
 corepack pnpm typecheck
 ```
 
-## Yayın (Cloudflare Pages)
+## Yayın (Cloudflare Workers)
 
-Site `out/` klasörüne statik olarak derlenir. Pages projesini GitHub reposuna
-bağlarken şu ayarları kullanın:
+Site `out/` klasörüne statik olarak derlenir ve `wrangler.toml` ile Worker'a
+yüklenir. Worker projesini GitHub reposuna bağlarken şu ayarları kullanın:
 
 | Ayar | Değer |
 |---|---|
-| Framework preset | None |
-| Build command | `pnpm build` |
-| Build output directory | `out` |
-| Değişkenler | `NODE_VERSION=22`, `RESEND_API_KEY` (gizli) |
+| Build command | `pnpm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Gizli değişken | `RESEND_API_KEY` |
 
+`wrangler.toml` içindeki `name`, Cloudflare'deki Worker adıyla aynı olmalıdır.
 Güvenlik ve önbellek başlıkları `public/_headers`, iletişim formu
-`functions/api/send.ts` içindedir.
+`worker/index.ts` içindedir.
 
 ## İçerik
 

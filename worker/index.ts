@@ -1,9 +1,13 @@
 import { z } from "zod";
-import { config } from "../../src/data/config";
+import { config } from "../src/data/config";
 
-// Cloudflare Pages Function: statik çıktıda Next.js route handler çalışmadığı
-// için iletişim formu `/api/send` adresini buradan karşılar.
-type Env = { RESEND_API_KEY?: string };
+// Cloudflare Worker: statik çıktıda Next.js route handler çalışmadığı için
+// iletişim formu `/api/send` adresini buradan karşılar. Diğer her istek
+// `out/` klasöründeki statik dosyalara gider (bkz. wrangler.toml).
+type Env = {
+  ASSETS: { fetch: (request: Request) => Promise<Response> };
+  RESEND_API_KEY?: string;
+};
 
 // Yalnızca aynı Worker örneği içinde geçerlidir: kaba bir fren, kesin sınır değil.
 const rateLimit = new Map<string, { count: number; resetAt: number }>();
@@ -34,13 +38,7 @@ const escapeHtml = (text: string) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
-export const onRequestPost = async ({
-  request,
-  env,
-}: {
-  request: Request;
-  env: Env;
-}) => {
+const handleSend = async (request: Request, env: Env) => {
   try {
     const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
     if (isRateLimited(ip)) {
@@ -78,4 +76,17 @@ export const onRequestPost = async ({
   } catch {
     return Response.json({ error: "E-posta gönderilemedi" }, { status: 500 });
   }
+};
+
+export default {
+  fetch(request: Request, env: Env) {
+    const { pathname } = new URL(request.url);
+    if (pathname === "/api/send") {
+      if (request.method !== "POST") {
+        return new Response(null, { status: 405, headers: { Allow: "POST" } });
+      }
+      return handleSend(request, env);
+    }
+    return env.ASSETS.fetch(request);
+  },
 };
