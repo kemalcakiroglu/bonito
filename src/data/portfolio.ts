@@ -111,6 +111,16 @@ const portfolio: PortfolioItem[] = [
     href: "https://enesozdemir.tr/",
     linkLabel: "enesozdemir.tr",
   },
+  {
+    id: "lorisparfum",
+    title: "Loris Parfum Herold Center",
+    category: "Sosyal Medya Yönetimi",
+    description:
+      "Almanya Norderstedt'teki Herold Center mağazası için Instagram hesabının yönetimi.",
+    image: "/assets/portfolio/lorisparfum.jpg",
+    href: "https://www.instagram.com/lorisparfum_heroldcenter/",
+    linkLabel: "@lorisparfum_heroldcenter",
+  },
 ];
 
 export default portfolio;
