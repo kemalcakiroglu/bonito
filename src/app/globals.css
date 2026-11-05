@@ -35,7 +35,7 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     /* accent helpers — monochrome ink */
-    --brand: #ff5a4f;
+    --brand: #ff3131;
     --accent-solid: #171717;
     --accent-glow: transparent;
   }
@@ -66,7 +66,7 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     /* accent helpers — monochrome ink */
-    --brand: #ff5a4f;
+    --brand: #ff3131;
     --accent-solid: #f5f5f5;
     --accent-glow: transparent;
   }

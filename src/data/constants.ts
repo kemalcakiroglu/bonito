@@ -28,7 +28,7 @@ export type Skill = {
   shortcut?: string;
 };
 
-const CORAL = "#ff5a4f";
+const CORAL = "#ff3131";
 const AMBER = "#f5a524";
 const TEAL = "#14b8a6";
 const BLUE = "#3b82f6";

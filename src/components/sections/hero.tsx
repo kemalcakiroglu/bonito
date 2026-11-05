@@ -10,6 +10,7 @@ import { SiInstagram, SiLinkedin } from "react-icons/si";
 import { config } from "@/data/config";
 
 import SectionWrapper from "../ui/section-wrapper";
+import Logo from "../logo";
 
 const HeroSection = () => {
   const { isLoading } = usePreloader();
@@ -40,14 +41,8 @@ const HeroSection = () => {
                 </BlurIn>
 
                 <BlurIn delay={1}>
-                  <h1
-                    className={cn(
-                      "-ml-[6px] leading-none text-transparent text-slate-800 text-left",
-                      "font-bold text-7xl md:text-7xl lg:text-8xl xl:text-9xl",
-                      "cursor-default text-edge-outline font-display "
-                    )}
-                  >
-                    {config.author}
+                  <h1 className="my-2">
+                    <Logo className="h-20 max-w-full lg:h-24 xl:h-28" />
                   </h1>
                 </BlurIn>
                 <BlurIn delay={1.2}>

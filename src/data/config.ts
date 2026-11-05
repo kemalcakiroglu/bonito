@@ -1,4 +1,4 @@
-// TODO(bonito): `email`, `site` ve `social` gerçek bilgilerle doldurulmalı.
+// TODO(bonito): `social` bağlantıları doldurulmalı.
 // İletişim formu mesajları `email` adresine gönderir; boş bırakılan sosyal
 // medya bağlantıları sitede gösterilmez.
 const config = {
@@ -24,8 +24,8 @@ const config = {
   ],
   author: "Bonito",
   tagline: "Akılda kalan markalar için fikir üretiyoruz.",
-  email: "merhaba@bonito.example",
-  site: "https://bonito.example",
+  email: "info@bonitoagency.com",
+  site: "https://bonitoagency.com",
 
   get ogImg() {
     return this.site + "/assets/seo/og-image.png";
