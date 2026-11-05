@@ -38,6 +38,10 @@ const escapeHtml = (text: string) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
+// `code` gizli bilgi içermez, yalnızca sorunun türünü söyler; ayrıntı Worker günlüğündedir.
+const sendFailed = (code: string) =>
+  Response.json({ error: "E-posta gönderilemedi", code }, { status: 500 });
+
 const handleSend = async (request: Request, env: Env) => {
   try {
     const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
@@ -54,6 +58,8 @@ const handleSend = async (request: Request, env: Env) => {
     }
     const { fullName, email, message } = parsed.data;
 
+    if (!env.RESEND_API_KEY) return sendFailed("missing_api_key");
+
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -61,7 +67,7 @@ const handleSend = async (request: Request, env: Env) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Bonito Web <onboarding@resend.dev>",
+        from: `Bonito Web <${config.email}>`,
         to: [config.email],
         reply_to: email,
         subject: "Web sitesinden yeni mesaj",
@@ -70,11 +76,13 @@ const handleSend = async (request: Request, env: Env) => {
     });
 
     if (!response.ok) {
-      return Response.json({ error: "E-posta gönderilemedi" }, { status: 500 });
+      console.error("Resend hatası", response.status, await response.text());
+      return sendFailed(`resend_${response.status}`);
     }
     return Response.json(await response.json());
-  } catch {
-    return Response.json({ error: "E-posta gönderilemedi" }, { status: 500 });
+  } catch (error) {
+    console.error("Form hatası", error);
+    return sendFailed("unexpected");
   }
 };
 
