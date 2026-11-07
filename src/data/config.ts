@@ -1,4 +1,5 @@
-// TODO(bonito): `social` bağlantıları doldurulmalı.
+// TODO(bonito): `legal` alanına şirketin tam ticari unvanı ve adresi yazılmalı
+// (KVKK aydınlatma metninde veri sorumlusu olarak görünür).
 // İletişim formu mesajları `email` adresine gönderir; boş bırakılan sosyal
 // medya bağlantıları sitede gösterilmez.
 const config = {
@@ -23,15 +24,19 @@ const config = {
     "influencer marketing",
   ],
   author: "Bonito",
-  tagline: "Akılda kalan markalar için fikir üretiyoruz.",
   email: "info@bonitoagency.com",
   site: "https://bonitoagency.com",
+
+  legal: {
+    name: "Bonito",
+    address: "",
+  },
 
   get ogImg() {
     return this.site + "/assets/seo/og-image.png";
   },
   social: {
-    instagram: "",
+    instagram: "https://www.instagram.com/bonitoagency/",
     linkedin: "",
     twitter: "",
   },

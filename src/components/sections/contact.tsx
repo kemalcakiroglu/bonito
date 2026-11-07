@@ -11,29 +11,31 @@ import ContactForm from "../ContactForm";
 import { config } from "@/data/config";
 import { SectionHeader } from "./section-header";
 import SectionWrapper from "../ui/section-wrapper";
+import { useT } from "@/i18n/locale";
 
 const ContactSection = () => {
+  const t = useT();
   return (
     <SectionWrapper id="contact" className="min-h-screen max-w-7xl mx-auto ">
       <SectionHeader id='contact' className="relative mb-14" title={
         <>
-          BİRLİKTE <br />
-          ÇALIŞALIM
+          {t.contact.titleTop} <br />
+          {t.contact.titleBottom}
         </>} />
       <div className="grid grid-cols-1 md:grid-cols-2 z-[9999] mx-4">
         <Card className="min-w-7xl bg-white/70 dark:bg-black/70 backdrop-blur-sm rounded-xl mt-10 md:mt-20">
           <CardHeader>
-            <CardTitle className="text-4xl">Bize Yazın</CardTitle>
+            <CardTitle className="text-4xl">{t.contact.cardTitle}</CardTitle>
             <CardDescription>
-              Markanızı ve hedefinizi anlatın, size dönüş yapalım. Doğrudan{" "}
+              {t.contact.descBefore}{" "}
               <a
                 target="_blank"
                 href={`mailto:${config.email}`}
                 className="text-foreground underline underline-offset-2 cursor-can-hover rounded-lg"
               >
                 {config.email.replace(/@/g, "(at)")}
-              </a>{" "}
-              adresine de yazabilirsiniz.
+              </a>
+              {t.contact.descAfter ? ` ${t.contact.descAfter}` : "."}
             </CardDescription>
           </CardHeader>
           <CardContent>

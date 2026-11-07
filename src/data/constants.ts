@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/locale";
+
 // order = keycap layout, 4 per row (see keyboard-scene.tsx)
 export enum SkillNames {
   WEB = "web",
@@ -114,7 +116,69 @@ export const PROCESS: ProcessStep[] = [
   },
 ];
 
-export const themeDisclaimers = {
-  light: ["Aydınlık temaya geçmek ister misiniz?"],
-  dark: ["Karanlık tema açıldı."],
+// İngilizce metinler. Etiketler 3B klavyede de çizilir: yalnızca ASCII.
+const SKILL_TEXT_EN: Record<SkillNames, Pick<Skill, "label" | "shortDescription">> = {
+  [SkillNames.WEB]: { label: "Website", shortDescription: "We build corporate sites, online stores and landing pages." },
+  [SkillNames.UX]: { label: "UI/UX", shortDescription: "We improve your interface and take care of maintenance." },
+  [SkillNames.SOCIAL]: { label: "Social Media", shortDescription: "We manage your community and content calendar." },
+  [SkillNames.CONTENT]: { label: "Creative", shortDescription: "We produce Reels/TikTok, static designs and copy." },
+  [SkillNames.META]: { label: "Meta Ads", shortDescription: "We manage your Facebook and Instagram ads." },
+  [SkillNames.GOOGLE]: { label: "Google Ads", shortDescription: "We run search, shopping and display campaigns." },
+  [SkillNames.SEO]: { label: "SEO", shortDescription: "We grow your organic visibility in search engines." },
+  [SkillNames.INFLUENCER]: { label: "Influencer", shortDescription: "We set up partnerships with KOLs and content creators." },
 };
+
+export const getSkills = (locale: Locale): Record<SkillNames, Skill> =>
+  locale === "tr"
+    ? SKILLS
+    : (Object.fromEntries(
+        Object.entries(SKILLS).map(([name, skill]) => [
+          name,
+          { ...skill, ...SKILL_TEXT_EN[name as SkillNames] },
+        ])
+      ) as Record<SkillNames, Skill>);
+
+const PROCESS_EN: ProcessStep[] = [
+  {
+    id: 1,
+    title: "Discovery",
+    summary: "We clarify your brand and goals together",
+    description: [
+      "We look at your brand, your competitors and your audience together.",
+      "We agree on how success will be measured from the start.",
+    ],
+    skills: [SkillNames.SEO, SkillNames.UX],
+  },
+  {
+    id: 2,
+    title: "Strategy",
+    summary: "We shape the idea and the roadmap",
+    description: [
+      "We plan the core message, the channels and the budget split.",
+      "We bring the timeline and responsibilities into a single plan.",
+    ],
+    skills: [SkillNames.META, SkillNames.GOOGLE, SkillNames.SOCIAL],
+  },
+  {
+    id: 3,
+    title: "Production",
+    summary: "We turn the idea into content",
+    description: [
+      "We produce visuals, copy and videos in one consistent voice.",
+      "We share the work with you for approval before it goes live.",
+    ],
+    skills: [SkillNames.CONTENT, SkillNames.WEB, SkillNames.INFLUENCER],
+  },
+  {
+    id: 4,
+    title: "Launch & Measurement",
+    summary: "We launch, measure and improve",
+    description: [
+      "We launch the campaign on the planned channels.",
+      "We report the results and use what we learn to improve the next step.",
+    ],
+    skills: [SkillNames.META, SkillNames.GOOGLE, SkillNames.SEO],
+  },
+];
+
+export const getProcess = (locale: Locale) => (locale === "tr" ? PROCESS : PROCESS_EN);

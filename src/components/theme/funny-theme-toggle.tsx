@@ -6,7 +6,7 @@ import { flushSync } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useToast } from "../ui/use-toast";
-import { themeDisclaimers } from "@/data/constants";
+import { useT } from "@/i18n/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export default function FunnyThemeToggle({
@@ -18,6 +18,7 @@ export default function FunnyThemeToggle({
   const [counter, setCounter] = React.useState({ dark: 0, light: 0 });
   const { toast } = useToast();
   const ref = React.useRef<HTMLButtonElement>(null);
+  const t = useT().theme;
 
   const toggleTheme = async (newTheme: string, event?: React.MouseEvent) => {
     // @ts-ignore
@@ -65,8 +66,7 @@ export default function FunnyThemeToggle({
   };
 
   const goDark = (e: React.MouseEvent) => {
-    const description =
-      themeDisclaimers.dark[counter.dark % themeDisclaimers.dark.length];
+    const description = t.darkOn;
     setCounter({ ...counter, dark: counter.dark + 1 });
     toast({
       description: description,
@@ -87,7 +87,7 @@ export default function FunnyThemeToggle({
         >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 dark:-rotate-90 dark:scale-0 pointer-events-none" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 dark:rotate-0 dark:scale-100 pointer-events-none" />
-          <span className="sr-only">Temayı değiştir</span>
+          <span className="sr-only">{t.toggle}</span>
         </Button>
       ) : (
         <Popover>
@@ -99,15 +99,15 @@ export default function FunnyThemeToggle({
             >
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Temayı değiştir</span>
+              <span className="sr-only">{t.toggle}</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent className="z-[99999] flex flex-col items-center gap-2">
             {/* <p className="text-sm">these stunts are done by professional only</p> */}
             <p className="text-sm text-center">
-              {themeDisclaimers.light[counter.light % themeDisclaimers.light.length]}
+              {t.lightPrompt}
             </p>
-            <Button onClick={goLight}>Aydınlık tema</Button>
+            <Button onClick={goLight}>{t.goLight}</Button>
           </PopoverContent>
         </Popover>
       )}

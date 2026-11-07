@@ -50,7 +50,12 @@ const KIT = {
 
 export const KEYBOARD_MODEL_URL = "/assets/keyboard/keycaps.glb";
 
-export function createKeyboardScene(skills: readonly KeyboardSkill[], columns = 6): KeyboardScene {
+export function createKeyboardScene(
+  skills: readonly KeyboardSkill[],
+  columns = 6,
+  // başlık 3B metin olarak çizilir: yalnızca ASCII
+  defaultLabel = { title: "Hizmetler", description: "Bir tuşun üzerine gelin, dokunun ya da basın" },
+): KeyboardScene {
   if (!skills.length || skills.length > 96) throw new RangeError("Choose between 1 and 96 keyboard skills");
   if (!Number.isInteger(columns) || columns < 1 || columns > 12) throw new RangeError("Keyboard columns must be between 1 and 12");
   if (new Set(skills.map((s) => s.name)).size !== skills.length) throw new Error("Keyboard skill names must be unique");
@@ -145,7 +150,7 @@ export function createKeyboardScene(skills: readonly KeyboardSkill[], columns = 
       visible: true, castShadow: false, receiveShadow: false, children: [] }, id);
     return id;
   };
-  const defaultLabelId = label("Hizmetler", "Bir tuşun üzerine gelin, dokunun ya da basın");
+  const defaultLabelId = label(defaultLabel.title, defaultLabel.description);
   doc.nodes[defaultLabelId].visible = true;
   const keys = skills.map((skill, index): KeyboardKey => {
     // separate groups let placement, motion, and presses compose

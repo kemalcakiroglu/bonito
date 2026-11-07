@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { alternatePath, homePath, useLocale, useT } from "@/i18n/locale";
 import styles from "./style.module.scss";
 import { opacity, background } from "./anim";
 import Nav from "./nav";
@@ -16,6 +18,9 @@ interface HeaderProps {
 
 const Header = ({ loader }: HeaderProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const pathname = usePathname();
+  const locale = useLocale();
+  const t = useT().header;
   return (
     <motion.header
       className={cn(
@@ -46,15 +51,25 @@ const Header = ({ loader }: HeaderProps) => {
       >
       </div> */}
       <div className={cn(styles.bar, "flex items-center justify-between")}>
-        <Link href="/" aria-label="Bonito ana sayfa" className="flex items-center justify-center pl-4">
+        <Link href={homePath(locale)} aria-label={t.home} className="flex items-center justify-center pl-4">
           <Logo className="h-7" />
         </Link>
 
-        <FunnyThemeToggle className="w-6 h-6 mr-4 hidden md:flex" />
+        <div className="flex items-center">
+          <Link
+            href={alternatePath(pathname)}
+            aria-label={t.switchLanguage}
+            hrefLang={locale === "tr" ? "en" : "tr"}
+            className="!static mr-4 text-sm font-medium uppercase !text-muted-foreground transition-colors hover:!text-foreground"
+          >
+            {t.otherLanguage}
+          </Link>
+          <FunnyThemeToggle className="w-6 h-6 mr-4 hidden md:flex" />
+        </div>
         <Button
           variant={"ghost"}
           onClick={() => setIsActive(!isActive)}
-          aria-label={isActive ? "Menüyü kapat" : "Menüyü aç"}
+          aria-label={isActive ? t.closeMenu : t.openMenu}
           aria-expanded={isActive}
           className={cn(
             styles.el,
@@ -66,10 +81,10 @@ const Header = ({ loader }: HeaderProps) => {
               variants={opacity}
               animate={!isActive ? "open" : "closed"}
             >
-              Menü
+              {t.menu}
             </motion.p>
             <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
-              Kapat
+              {t.close}
             </motion.p>
           </div>
           <div

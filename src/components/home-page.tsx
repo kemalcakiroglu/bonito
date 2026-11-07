@@ -1,0 +1,31 @@
+"use client";
+
+import React from "react";
+import SmoothScroll from "@/components/smooth-scroll";
+import { cn } from "@/lib/utils";
+import AnimatedBackground from "@/components/animated-background";
+import SkillsSection from "@/components/sections/skills";
+import ProcessSection from "@/components/sections/process";
+import SolutionsSection from "@/components/sections/projects";
+import PortfolioSection from "@/components/sections/portfolio";
+import ContactSection from "@/components/sections/contact";
+import HeroSection from "@/components/sections/hero";
+
+// Türkçe (/) ve İngilizce (/en) ana sayfanın ortak gövdesi; dil URL'den okunur.
+function HomePage() {
+  return (
+    <SmoothScroll>
+      <AnimatedBackground />
+      <main className={cn("bg-slate-100 dark:bg-transparent canvas-overlay-mode")}>
+        <HeroSection />
+        <SkillsSection />
+        <ProcessSection />
+        <SolutionsSection />
+        <PortfolioSection />
+        <ContactSection />
+      </main>
+    </SmoothScroll>
+  );
+}
+
+export default HomePage;

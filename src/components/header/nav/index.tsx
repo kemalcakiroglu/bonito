@@ -6,7 +6,8 @@ import Body from "./body/body";
 import Image from "./image/image";
 import MotionToggle from "@/components/motion-toggle";
 
-import { links } from "@/components/header/config";
+import { getLinks } from "@/components/header/config";
+import { useLocale } from "@/i18n/locale";
 import { cn } from "@/lib/utils";
 
 interface IndexProps {
@@ -19,6 +20,7 @@ interface SelectedLinkState {
 }
 
 const Index: React.FC<IndexProps> = ({ setIsActive }) => {
+  const links = getLinks(useLocale());
   const [selectedLink, setSelectedLink] = useState<SelectedLinkState>({
     isActive: false,
     index: 0,

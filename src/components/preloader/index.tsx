@@ -42,8 +42,8 @@ export const usePreloader = () => {
 const LOADING_TIME = 2.5;
 function Preloader({ children, disabled = false }: PreloaderProps) {
   const pathname = usePathname();
-  // Skip the loading splash for the résumé route (and anywhere it's disabled).
-  const skip = disabled || pathname?.startsWith("/resume");
+  // Açılış ekranı yalnızca 3B sahneli ana sayfalarda gösterilir (/ ve /en).
+  const skip = disabled || (pathname !== "/" && pathname !== "/en");
 
   const [isLoading, setIsLoading] = useState(!skip);
   const [loadingPercent, setLoadingPercent] = useState(skip ? 100 : 0);

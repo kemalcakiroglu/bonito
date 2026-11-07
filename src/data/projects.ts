@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/locale";
+
 // Çözüm kategorileri. `promise` temel müşteri vaadi, `services` kapsamdaki
 // hizmetlerdir. Rakam veya sonuç garantisi eklemeden önce kanıtlanabilir olduğundan emin olun.
 export type SolutionService = {
@@ -146,5 +148,132 @@ const solutions: Solution[] = [
     note: "SEO birikimli çalışır, sonuçlar zamanla görünür. KOL (Key Opinion Leader), alanında takipçilerini etkileyen fikir lideridir.",
   },
 ];
+
+const solutionsEn: Solution[] = [
+  {
+    ...solutions[0],
+    category: "Infrastructure",
+    title: "Digital Presence & Infrastructure",
+    promise: "A trustworthy, mobile-friendly digital storefront built to convert.",
+    intro:
+      "Your website is where visitors brought in by ads and content land. We build a foundation that tells your brand's story, works smoothly on every screen and moves visitors to act.",
+    audience:
+      "Brands launching a new website, renewing an old one or starting to sell online.",
+    services: [
+      {
+        name: "Website Development",
+        detail: "We build three types of websites depending on your needs.",
+        items: [
+          "Corporate: a site that presents your brand and services",
+          "E-commerce: an online store with product, cart and checkout flows",
+          "Landing page: a page focused on a single product or campaign",
+        ],
+      },
+      {
+        name: "UI/UX Optimization & Technical Maintenance",
+        detail: "We improve your live website and keep it running smoothly.",
+        items: [
+          "Mobile layout and ease of use",
+          "Simpler form, cart and checkout steps",
+          "Updates, speed and error monitoring",
+        ],
+      },
+    ],
+  },
+  {
+    ...solutions[1],
+    category: "Communication",
+    title: "Content & Brand Communication",
+    promise: "Consistent brand visibility, engagement and brand loyalty.",
+    intro:
+      "Brands are remembered through regular, consistent communication, not a single post. We plan what to share, produce the content and manage the conversation with your followers.",
+    audience:
+      "Brands whose social media runs irregularly or who can't make time for content production.",
+    services: [
+      {
+        name: "Social Media Management",
+        detail: "We manage your accounts according to a plan.",
+        items: [
+          "Monthly content calendar and posting plan",
+          "Community management through comments and messages",
+          "Tracking post performance",
+        ],
+      },
+      {
+        name: "Content Production",
+        detail: "We create content that fits the language of each channel.",
+        items: [
+          "Short videos such as Reels and TikTok",
+          "Static designs for posts, stories and ads",
+          "Copywriting in your brand's voice",
+        ],
+      },
+    ],
+  },
+  {
+    ...solutions[2],
+    category: "Growth",
+    title: "Performance Marketing",
+    promise: "Measurable revenue growth, lead generation and high ROAS.",
+    intro:
+      "You need to see where your ad budget goes and what it brings back. We set up campaigns around your goal, measure the results and move the budget to what works.",
+    audience:
+      "Brands that want to grow online sales or customer requests such as forms and calls.",
+    services: [
+      {
+        name: "Meta Ads",
+        detail: "We reach the right audience on Facebook and Instagram.",
+        items: [
+          "Audience and retargeting setups",
+          "Image, video and copy testing",
+          "Conversion tracking and budget optimization",
+        ],
+      },
+      {
+        name: "Google Ads",
+        detail: "We put you in front of people searching for you.",
+        items: [
+          "Search: appear to people looking for your product or service",
+          "Shopping: show products with images and prices",
+          "Display: brand reminders and awareness",
+        ],
+      },
+    ],
+    note: "ROAS shows how much revenue each 1 unit spent on ads brings back. A lead is a potential customer who contacts you through a form or by phone.",
+  },
+  {
+    ...solutions[3],
+    category: "Earned Media",
+    title: "Visibility & Trust",
+    promise: "Long-term cost advantage through organic traffic and third-party credibility.",
+    intro:
+      "Being findable when ads stop, and having others talk about your brand, builds trust. We manage your visibility in search results and your partnerships with content creators.",
+    audience:
+      "Companies that want to rely less on ad budgets and strengthen their brand over the long term.",
+    services: [
+      {
+        name: "Search Engine Optimization (SEO)",
+        detail: "We work to make your website easier to find in search.",
+        items: [
+          "Keyword and competitor research",
+          "Technical SEO and on-page improvements",
+          "A content plan around what people search for",
+        ],
+      },
+      {
+        name: "Influencer Marketing",
+        detail: "We connect your brand with the right content creators.",
+        items: [
+          "Selecting KOLs and creators that fit your brand",
+          "Managing partnerships, briefs and the content process",
+          "Tracking results after publishing",
+        ],
+      },
+    ],
+    note: "SEO compounds over time, so results take a while to show. A KOL (Key Opinion Leader) is an opinion leader who influences their followers in a field.",
+  },
+];
+
+export const getSolutions = (locale: Locale) => (locale === "tr" ? solutions : solutionsEn);
 
 export default solutions;

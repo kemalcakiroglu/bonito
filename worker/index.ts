@@ -29,6 +29,9 @@ const Email = z.object({
   fullName: z.string().min(2, "Ad soyad geçersiz."),
   email: z.string().email({ message: "E-posta geçersiz." }),
   message: z.string().min(10, "Mesaj çok kısa."),
+  // KVKK m.9: yurt dışına aktarım için açık rıza (formdaki onay kutusu)
+  consent: z.literal(true, { errorMap: () => ({ message: "Açık rıza gerekli." }) }),
+  locale: z.enum(["tr", "en"]).optional(),
 });
 
 const escapeHtml = (text: string) =>
@@ -56,7 +59,7 @@ const handleSend = async (request: Request, env: Env) => {
     if (!parsed.success) {
       return Response.json({ error: parsed.error.message }, { status: 400 });
     }
-    const { fullName, email, message } = parsed.data;
+    const { fullName, email, message, locale } = parsed.data;
 
     if (!env.RESEND_API_KEY) return sendFailed("missing_api_key");
 
@@ -71,7 +74,7 @@ const handleSend = async (request: Request, env: Env) => {
         to: [config.email],
         reply_to: email,
         subject: "Web sitesinden yeni mesaj",
-        html: `<h1>Gönderen: ${escapeHtml(fullName)}</h1><p>${escapeHtml(email)} size bir mesaj gönderdi</p><blockquote>${escapeHtml(message)}</blockquote>`,
+        html: `<h1>Gönderen: ${escapeHtml(fullName)}</h1><p>${escapeHtml(email)} size bir mesaj gönderdi</p><blockquote>${escapeHtml(message)}</blockquote><p>Site dili: ${locale === "en" ? "İngilizce" : "Türkçe"} · Yurt dışı aktarım açık rızası: verildi (${new Date().toISOString()})</p>`,
       }),
     });
 

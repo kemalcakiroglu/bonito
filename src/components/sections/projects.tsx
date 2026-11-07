@@ -3,18 +3,21 @@ import React from "react";
 import { Check, Users } from "lucide-react";
 import { motion } from "motion/react";
 
-import solutions, { Solution } from "@/data/projects";
+import { getSolutions, type Solution } from "@/data/projects";
+import { useLocale, useT } from "@/i18n/locale";
 import { SectionHeader } from "./section-header";
 
 import SectionWrapper from "../ui/section-wrapper";
 
 const SolutionsSection = () => {
+  const t = useT();
+  const solutions = getSolutions(useLocale());
   return (
     <SectionWrapper id="projects" className="max-w-7xl mx-auto px-4 pb-20">
       <SectionHeader
         id="projects"
-        title="Çözümler"
-        desc="Markanızın ihtiyacına göre tek bir hizmetle başlayabilir veya hepsini birlikte yürütebilirsiniz."
+        title={t.solutions.title}
+        desc={t.solutions.desc}
         className="static"
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -33,6 +36,7 @@ const SolutionCard = ({
   solution: Solution;
   index: number;
 }) => {
+  const t = useT();
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -85,7 +89,7 @@ const SolutionCard = ({
         <p className="flex gap-2 text-sm leading-relaxed text-muted-foreground">
           <Users className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden="true" />
           <span>
-            <strong className="font-medium text-foreground">Kimler için: </strong>
+            <strong className="font-medium text-foreground">{t.solutions.audience}</strong>
             {solution.audience}
           </span>
         </p>

@@ -1,4 +1,5 @@
-import { PROCESS, SkillNames, SKILLS } from "@/data/constants";
+import { getProcess, getSkills, SkillNames, type ProcessStep } from "@/data/constants";
+import { useLocale, useT } from "@/i18n/locale";
 import { SectionHeader } from "./section-header";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,8 @@ import { motion } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ProcessSection = () => {
+  const locale = useLocale();
+  const t = useT();
   return (
     <SectionWrapper
       id="process"
@@ -15,8 +18,8 @@ const ProcessSection = () => {
       <div className="w-full max-w-4xl px-4 md:px-8 mx-auto">
         <SectionHeader
           id="process"
-          title="Süreç"
-          desc="Bir işi nasıl ele alıyoruz?"
+          title={t.process.title}
+          desc={t.process.desc}
           className="mb-12 md:mb-20 mt-0"
         />
 
@@ -24,7 +27,7 @@ const ProcessSection = () => {
           {/* Connector Line - simplified to a subtle border */}
           <div className="absolute left-8 md:left-1/2 top-4 bottom-4 w-px bg-border hidden md:block -translate-x-1/2" />
 
-          {PROCESS.map((step, index) => (
+          {getProcess(locale).map((step, index) => (
             <div key={step.id} className="relative">
               <ProcessCard step={step} index={index} />
             </div>
@@ -39,9 +42,10 @@ const ProcessCard = ({
   step,
   index,
 }: {
-  step: (typeof PROCESS)[0];
+  step: ProcessStep;
   index: number;
 }) => {
+  const skills = getSkills(useLocale());
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -84,7 +88,7 @@ const ProcessCard = ({
 
           <div className="flex flex-wrap gap-2">
             {step.skills.map((skillName) => {
-              const skill = SKILLS[skillName as SkillNames];
+              const skill = skills[skillName as SkillNames];
               return (
                 <Badge
                   key={skillName}

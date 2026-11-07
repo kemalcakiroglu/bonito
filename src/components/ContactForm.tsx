@@ -8,31 +8,39 @@ import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { z } from "zod";
+import { homePath, useLocale, useT } from "@/i18n/locale";
+import type { UiText } from "@/i18n/ui";
 
-const formSchema = z.object({
-  fullName: z.string().min(2, "Ad soyad en az 2 karakter olmalı"),
-  email: z.string().email("Geçerli bir e-posta adresi girin"),
-  message: z.string().min(10, "Mesaj en az 10 karakter olmalı"),
-});
+const makeSchema = (t: UiText["form"]) =>
+  z.object({
+    fullName: z.string().min(2, t.nameError),
+    email: z.string().email(t.emailError),
+    message: z.string().min(10, t.messageError),
+    consent: z.literal(true, { errorMap: () => ({ message: t.consentError }) }),
+  });
 
-type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
+type FieldErrors = Partial<Record<"fullName" | "email" | "message" | "consent", string>>;
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [consent, setConsent] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [errors, setErrors] = React.useState<FieldErrors>({});
 
   const { toast } = useToast();
   const router = useRouter();
+  const locale = useLocale();
+  const t = useT().form;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
 
-    const result = formSchema.safeParse({ fullName, email, message });
+    const result = makeSchema(t).safeParse({ fullName, email, message, consent });
     if (!result.success) {
       const fieldErrors: FieldErrors = {};
       result.error.issues.forEach((issue) => {
@@ -48,15 +56,15 @@ const ContactForm = () => {
       const res = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, email, message }),
+        body: JSON.stringify({ fullName, email, message, consent, locale }),
       });
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.error || `Request failed (${res.status})`);
       }
       toast({
-        title: "Teşekkürler!",
-        description: "Mesajınızı aldık, en kısa sürede dönüş yapacağız.",
+        title: t.successTitle,
+        description: t.successDesc,
         variant: "default",
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
@@ -64,14 +72,15 @@ const ContactForm = () => {
       setFullName("");
       setEmail("");
       setMessage("");
+      setConsent(false);
       const timer = setTimeout(() => {
-        router.push("/");
+        router.push(homePath(locale));
         clearTimeout(timer);
       }, 1000);
     } catch (err) {
       toast({
-        title: "Hata",
-        description: "Bir sorun oluştu. Lütfen tekrar deneyin.",
+        title: t.errorTitle,
+        description: t.errorDesc,
         className: cn(
           "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
         ),
@@ -84,10 +93,10 @@ const ContactForm = () => {
     <form className="min-w-7xl mx-auto sm:mt-4" onSubmit={handleSubmit} aria-busy={loading}>
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
         <LabelInputContainer>
-          <Label htmlFor="fullname">Ad soyad</Label>
+          <Label htmlFor="fullname">{t.nameLabel}</Label>
           <Input
             id="fullname"
-            placeholder="Adınız Soyadınız"
+            placeholder={t.namePlaceholder}
             type="text"
             value={fullName}
             onChange={(e) => { setFullName(e.target.value); setErrors((p) => ({ ...p, fullName: undefined })); }}
@@ -95,10 +104,10 @@ const ContactForm = () => {
           {errors.fullName && <p className="text-sm text-red-500">{errors.fullName}</p>}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">E-posta adresi</Label>
+          <Label htmlFor="email">{t.emailLabel}</Label>
           <Input
             id="email"
-            placeholder="siz@sirketiniz.com"
+            placeholder={t.emailPlaceholder}
             type="email"
             value={email}
             onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: undefined })); }}
@@ -107,17 +116,38 @@ const ContactForm = () => {
         </LabelInputContainer>
       </div>
       <div className="grid w-full gap-1.5 mb-4">
-        <Label htmlFor="content">Mesajınız</Label>
+        <Label htmlFor="content">{t.messageLabel}</Label>
         <Textarea
-          placeholder="Markanızdan ve projenizden bahsedin"
+          placeholder={t.messagePlaceholder}
           id="content"
           value={message}
           onChange={(e) => { setMessage(e.target.value); setErrors((p) => ({ ...p, message: undefined })); }}
         />
         {errors.message && <p className="text-sm text-red-500">{errors.message}</p>}
         <p className="text-sm text-muted-foreground">
-          Bilgilerinizi yalnızca size dönüş yapmak için kullanırız.
+          {t.noticeBefore}{" "}
+          <Link
+            href={locale === "tr" ? "/kvkk" : "/en/privacy"}
+            target="_blank"
+            className="underline underline-offset-2 hover:text-foreground"
+          >
+            {t.noticeLink}
+          </Link>
+          {t.noticeAfter ? ` ${t.noticeAfter}` : "."}
         </p>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="consent" className="flex cursor-pointer items-start gap-2 text-sm text-muted-foreground">
+          <input
+            id="consent"
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => { setConsent(e.target.checked); setErrors((p) => ({ ...p, consent: undefined })); }}
+            className="mt-0.5 size-4 shrink-0 accent-[var(--brand)]"
+          />
+          <span>{t.consent}</span>
+        </label>
+        {errors.consent && <p className="mt-1 text-sm text-red-500">{errors.consent}</p>}
       </div>
       <Button
         disabled={loading}
@@ -127,11 +157,11 @@ const ContactForm = () => {
         {loading ? (
           <div className="flex items-center justify-center">
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            <p>Gönderiliyor</p>
+            <p>{t.sending}</p>
           </div>
         ) : (
           <div className="flex items-center justify-center">
-            Gönder <ChevronRight className="w-4 h-4 ml-4" />
+            {t.send} <ChevronRight className="w-4 h-4 ml-4" />
           </div>
         )}
         <BottomGradient />

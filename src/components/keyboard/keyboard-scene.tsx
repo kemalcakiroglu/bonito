@@ -2,7 +2,8 @@
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ChibiScene, type ChibiSceneApi, type ScenePointerEvent, type RuntimeEvent } from "@chibi3d/runtime";
-import { SKILLS } from "@/data/constants";
+import { getSkills } from "@/data/constants";
+import { useLocale, useT } from "@/i18n/locale";
 import { setSceneStatus } from "@/lib/scene-health";
 import { usePreloader } from "../preloader";
 import { createKeyboardScene, resolveKeyboardAsset, type KeyboardKey, type KeyboardSkill } from "./scene";
@@ -33,9 +34,11 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
   const [section, setSection] = useState<KeyboardSection>("hero");
   const [selected, setSelected] = useState<KeyboardSkill | null>(null);
   const playSound = useKeyboardSounds();
-  const scene = useMemo(() => createKeyboardScene(Object.values(SKILLS).map((skill) => ({
+  const locale = useLocale();
+  const t = useT();
+  const scene = useMemo(() => createKeyboardScene(Object.values(getSkills(locale)).map((skill) => ({
     ...skill, icon: skill.keyboardIcon ?? skill.icon,
-  })), 4), []);
+  })), 4, { title: t.skills.sceneTitle, description: t.skills.sceneHint }), [locale, t]);
   const { settings: graphics, markActive } = useAdaptiveGraphics(ready && !isLoading);
   const { shadows, softShadows, ao, bloom, lighting } = graphics;
   const environment = useMemo(() => ({
@@ -189,11 +192,11 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
       />
       {section === "skills" && ready && (
         <div className="pointer-events-none fixed inset-x-4 bottom-8 z-20 text-center text-foreground">
-          <p className="sr-only">{available ? `Ziyaretçiler tuşlara toplam ${total.toLocaleString("tr-TR")} kez bastı` : "Ortak tuş sayacı kullanılamıyor"}</p>
+          <p className="sr-only">{available ? t.skills.presses(total.toLocaleString(locale === "tr" ? "tr-TR" : "en-US")) : t.skills.countUnavailable}</p>
           <div aria-live="polite" className="sr-only">
-            <p className="text-xl font-semibold">{selected?.label ?? "Hizmetlerimizi keşfedin"}</p>
+            <p className="text-xl font-semibold">{selected?.label ?? t.skills.explore}</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              {selected?.shortDescription ?? "Bir tuşun üzerine gelin, dokunun ya da basın"}
+              {selected?.shortDescription ?? t.skills.sceneHint}
             </p>
           </div>
           <a
@@ -202,7 +205,7 @@ export default function KeyboardScene({ maxDpr }: { maxDpr: number }) {
             rel="noreferrer"
             className="pointer-events-auto text-xs text-muted-foreground underline underline-offset-4"
           >
-            Chibi ile oluşturuldu
+            {t.skills.renderedWith}
           </a>
         </div>
       )}

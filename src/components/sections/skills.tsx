@@ -4,7 +4,8 @@ import { useEffect, type CSSProperties } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionWrapper from "../ui/section-wrapper";
 import { SectionHeader } from "./section-header";
-import { SKILLS } from "@/data/constants";
+import { getSkills } from "@/data/constants";
+import { useLocale, useT } from "@/i18n/locale";
 import { usePerfProfile } from "@/hooks/use-perf-profile";
 import { cn } from "@/lib/utils";
 import { useSceneStatus } from "@/lib/scene-health";
@@ -17,6 +18,8 @@ import { useSceneStatus } from "@/lib/scene-health";
 const SkillsSection = () => {
   const { disable3D, ready } = usePerfProfile();
   const sceneStatus = useSceneStatus();
+  const locale = useLocale();
+  const t = useT();
   const showGrid = !ready || disable3D || sceneStatus !== "ready";
 
   useEffect(() => {
@@ -33,12 +36,12 @@ const SkillsSection = () => {
     >
       <SectionHeader
         id="skills"
-        title="Hizmetler"
-        desc={showGrid ? "Markanız için yaptığımız işler" : "(ipucu: bir tuşa basın)"}
+        title={t.skills.title}
+        desc={showGrid ? t.skills.gridDesc : t.skills.hint}
         className={showGrid ? "static mb-14" : undefined}
       />
       <ul className={showGrid ? "mx-auto grid w-full max-w-5xl grid-cols-2 gap-3 px-4 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5" : "sr-only"}>
-        {Object.values(SKILLS).map((skill) => (
+        {Object.values(getSkills(locale)).map((skill) => (
           <li
             key={skill.name}
             style={{ "--skill": skill.color } as CSSProperties}

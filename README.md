@@ -50,6 +50,8 @@ Güvenlik ve önbellek başlıkları `public/_headers`, iletişim formu
 
 | Dosya | İçerik |
 |---|---|
+| `src/i18n/ui.ts` | Arayüz metinleri (TR + EN, ikisi de zorunlu) |
+| `src/components/privacy-notice.tsx` | KVKK aydınlatma metni (`/kvkk`, `/en/privacy`) |
 | `src/data/config.ts` | Ad, e-posta, alan adı, sosyal medya, SEO metinleri |
 | `src/data/constants.ts` | Hizmetler (3B klavye tuşları), süreç adımları |
 | `src/data/projects.ts` | "Çözümler" kartları (hizmet kategorileri) |

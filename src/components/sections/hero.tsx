@@ -8,12 +8,14 @@ import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
 import { SiInstagram, SiLinkedin } from "react-icons/si";
 import { config } from "@/data/config";
+import { useT } from "@/i18n/locale";
 
 import SectionWrapper from "../ui/section-wrapper";
 import Logo from "../logo";
 
 const HeroSection = () => {
   const { isLoading } = usePreloader();
+  const t = useT();
 
   return (
     <SectionWrapper id="hero" className={cn("relative w-full h-screen")}>
@@ -36,7 +38,7 @@ const HeroSection = () => {
                       "cursor-default sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    Reklam Ajansı
+                    {t.hero.eyebrow}
                   </p>
                 </BlurIn>
 
@@ -52,7 +54,7 @@ const HeroSection = () => {
                       "cursor-default sm:text-xl md:text-xl bg-clip-text "
                     )}
                   >
-                    {config.tagline}
+                    {t.hero.tagline}
                   </p>
                 </BlurIn>
               </div>
@@ -61,7 +63,7 @@ const HeroSection = () => {
                   <BoxReveal delay={2} width="100%" >
                     <Button className="flex items-center gap-2 w-full">
                       <Send size={20} />
-                      <p>Teklif Al</p>
+                      <p>{t.hero.cta}</p>
                     </Button>
                   </BoxReveal>
                 </Link>
@@ -71,7 +73,7 @@ const HeroSection = () => {
                       variant={"outline"}
                       className="block w-full overflow-hidden"
                     >
-                      Hizmetlerimiz
+                      {t.hero.services}
                     </Button>
                   </Link>
                   <div className="flex items-center h-full gap-2">

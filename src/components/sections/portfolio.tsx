@@ -1,17 +1,21 @@
+"use client";
 import { ArrowUpRight } from "lucide-react";
-import portfolio from "@/data/portfolio";
+import { getPortfolio } from "@/data/portfolio";
+import { useLocale, useT } from "@/i18n/locale";
 import { SectionHeader } from "./section-header";
 import SectionWrapper from "../ui/section-wrapper";
 
 const PortfolioSection = () => {
+  const t = useT();
+  const portfolio = getPortfolio(useLocale());
   return (
     <SectionWrapper id="portfolio" className="relative bg-background px-4 py-24">
       {/* opak zemin: başlık sabit 3B klavyenin üstüne binmesin */}
       <div className="mx-auto max-w-7xl">
       <SectionHeader
         id="portfolio"
-        title="Projeler"
-        desc="Markalar ve kendi ürünlerimiz için yaptıklarımız."
+        title={t.portfolio.title}
+        desc={t.portfolio.desc}
         className="static mb-14"
       />
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -27,7 +31,7 @@ const PortfolioSection = () => {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.image}
-                  alt={`${item.title} ekran görüntüsü`}
+                  alt={t.portfolio.screenshot(item.title)}
                   loading="lazy"
                   className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />

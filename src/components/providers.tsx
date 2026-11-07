@@ -7,6 +7,7 @@ import { TooltipProvider } from "./ui/tooltip";
 
 import { GameContextProvider } from "@/contexts/game-context";
 import MotionPreferences from "./motion-preferences";
+import { LocaleProvider } from "@/i18n/locale";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return <ThemeProvider
@@ -14,6 +15,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
     defaultTheme="dark"
     disableTransitionOnChange
   >
+    <LocaleProvider>
     <MotionPreferences>
       <Preloader>
         <SocketContextProvider>
@@ -26,5 +28,6 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
         </SocketContextProvider>
       </Preloader>
     </MotionPreferences>
+    </LocaleProvider>
   </ThemeProvider>;
 };

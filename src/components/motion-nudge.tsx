@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import { enableMotion, usePerfProfile } from "@/hooks/use-perf-profile";
 import { cn } from "@/lib/utils";
+import { useT } from "@/i18n/locale";
 
 const DISMISS_KEY = "portfolio:motion-nudge-dismissed";
 
@@ -18,6 +19,7 @@ const DISMISS_KEY = "portfolio:motion-nudge-dismissed";
 export default function MotionNudge() {
   const { ready, rawReducedMotion, motionEnabled, lowEnd } = usePerfProfile();
   const [dismissed, setDismissed] = React.useState(true);
+  const t = useT().motion;
 
   React.useEffect(() => {
     try {
@@ -51,23 +53,23 @@ export default function MotionNudge() {
     >
       <button
         onClick={dismiss}
-        aria-label="Kapat"
+        aria-label={t.dismiss}
         className="absolute right-2 top-2 rounded-md p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
       >
         <X className="size-4" />
       </button>
       <p className="pr-6 text-sm font-medium text-foreground">
-        Azaltılmış hareket açık
+        {t.title}
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
-        Etkileşimli 3B sahne ve animasyonlar kapalı. Açmak ister misiniz?
+        {t.desc}
       </p>
       <div className="mt-3 flex gap-2">
         <Button size="sm" onClick={enableMotion}>
-          3B sahneyi aç
+          {t.enable}
         </Button>
         <Button size="sm" variant="ghost" onClick={dismiss}>
-          Hayır, teşekkürler
+          {t.decline}
         </Button>
       </div>
     </div>

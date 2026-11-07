@@ -2,8 +2,10 @@ import styles from './style.module.scss';
 import { translate } from '../../anim';
 import { motion } from 'motion/react';
 import { config } from '@/data/config';
+import { useT } from '@/i18n/locale';
 
 export default function Footer() {
+  const t = useT().nav;
   return (
     <div className={styles.footer}>
       <ul>
@@ -14,7 +16,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>{config.author}</span> Reklam Ajansı
+          <span>{config.author}</span> {t.agency}
         </motion.li>
       </ul>
       <ul>
@@ -25,7 +27,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>E-posta:</span> {config.email}
+          <span>{t.email}</span> {config.email}
         </motion.li>
       </ul>
     </div>

@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/locale";
+
 // Gerçek işler. Yeni proje eklerken görseli `public/assets/portfolio/` altına
 // (3:2 oranında) koyup buraya bir kayıt ekleyin; sonuç rakamı uydurmayın.
 export type PortfolioItem = {
@@ -122,5 +124,24 @@ const portfolio: PortfolioItem[] = [
     linkLabel: "@lorisparfum_heroldcenter",
   },
 ];
+
+const PORTFOLIO_EN: Record<string, Pick<PortfolioItem, "category" | "description">> = {
+  gokturkkimya: { category: "Corporate Website", description: "Corporate website for Göktürk Kimya, an industrial adhesive and hot-melt glue company." },
+  ambalajmagaza: { category: "E-commerce Website", description: "E-commerce website for GastroPack, a supplier of printed paper cups and packaging." },
+  stronghold: { category: "Corporate Website", description: "Corporate website for Stronghold Chemical, a Turkey-based adhesive supplier." },
+  eugastropack: { category: "Social Media Management", description: "Managing the Instagram account of GastroPack for the European market." },
+  basricakiroglu: { category: "Personal Website", description: "Website with an appointment form for Prof. Dr. Basri Çakıroğlu, a urology and robotic surgery specialist in Istanbul." },
+  skinsimulator: { category: "Web App", description: "A free simulator that brings case opening and trade-ups to the browser, with no real money involved." },
+  chestsimulator: { category: "Web Game", description: "A free, fan-made chest opening and collection game you can play in the browser without an account." },
+  potu: { category: "Corporate Website", description: "Website for POTÜ, a design studio working on kitchen, bathroom, living space and retail projects." },
+  potudesign: { category: "Social Media Management", description: "Managing the Instagram account of POTÜ Design, which offers custom woodwork and decoration." },
+  enesozdemir: { category: "Personal Website", description: "Personal website for actor Enes Özdemir with his biography, career, showreel and gallery." },
+  lorisparfum: { category: "Social Media Management", description: "Managing the Instagram account of the Herold Center store in Norderstedt, Germany." },
+};
+
+export const getPortfolio = (locale: Locale): PortfolioItem[] =>
+  locale === "tr"
+    ? portfolio
+    : portfolio.map((item) => ({ ...item, ...PORTFOLIO_EN[item.id] }));
 
 export default portfolio;

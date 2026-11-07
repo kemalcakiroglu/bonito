@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
-import { footer } from "./config";
 import { Button } from "../ui/button";
 import SocialMediaButtons from "../social/social-media-icons";
 import { config } from "@/data/config";
+import { homePath, useLocale, useT } from "@/i18n/locale";
 
 function CopyrightYear() {
   const year = new Date().getFullYear();
@@ -11,6 +11,13 @@ function CopyrightYear() {
 }
 
 function Footer() {
+  const locale = useLocale();
+  const t = useT().footer;
+  const home = homePath(locale);
+  const footer = [
+    { title: t.contact, href: `${home === "/" ? "/" : home}#contact` },
+    { title: t.privacy, href: locale === "tr" ? "/kvkk" : "/en/privacy" },
+  ];
   return (
     <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t border-border px-4 py-6 sm:flex-row md:px-6 sm:justify-between">
       <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -18,7 +25,7 @@ function Footer() {
         <Suspense fallback={null}>
           <CopyrightYear />
         </Suspense>{" "}
-        {config.author}. Tüm hakları saklıdır.
+        {config.author}. {t.rights}
       </p>
       <SocialMediaButtons />
       <nav className="flex gap-4 sm:gap-6 z-10">
