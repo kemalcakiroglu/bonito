@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { config } from "@/data/config";
 import HomePage from "@/components/home-page";
 
-const title = "Bonito | Advertising Agency";
+const title = "Advertising Agency in Istanbul: Digital Ads & Web | Bonito";
 const description =
-  "Bonito is an advertising agency offering website development, social media management, content production, Meta and Google Ads, SEO and influencer marketing under one roof.";
+  "Istanbul-based advertising agency: websites, social media, Meta and Google Ads and SEO from one team. See our projects and get a quote.";
 
 export const metadata: Metadata = {
   title,
   description,
-  alternates: { canonical: "/en", languages: { tr: "/", en: "/en" } },
+  alternates: { canonical: "/en", languages: { tr: "/", en: "/en", "x-default": "/" } },
   openGraph: {
     title,
     description,

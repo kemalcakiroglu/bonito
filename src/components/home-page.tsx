@@ -8,6 +8,7 @@ import SkillsSection from "@/components/sections/skills";
 import ProcessSection from "@/components/sections/process";
 import SolutionsSection from "@/components/sections/projects";
 import PortfolioSection from "@/components/sections/portfolio";
+import AboutSection from "@/components/sections/about";
 import ContactSection from "@/components/sections/contact";
 import HeroSection from "@/components/sections/hero";
 
@@ -22,6 +23,7 @@ function HomePage() {
         <ProcessSection />
         <SolutionsSection />
         <PortfolioSection />
+        <AboutSection />
         <ContactSection />
       </main>
     </SmoothScroll>

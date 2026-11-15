@@ -14,6 +14,9 @@ function Footer() {
   const locale = useLocale();
   const t = useT().footer;
   const home = homePath(locale);
+  const b = config.business;
+  const address = [b.streetAddress, b.postalCode, b.district, b.city].filter(Boolean).join(", ");
+  const nap = [address, b.phone].filter(Boolean).join(" · ");
   const footer = [
     { title: t.contact, href: `${home === "/" ? "/" : home}#contact` },
     { title: t.privacy, href: locale === "tr" ? "/kvkk" : "/en/privacy" },
@@ -27,6 +30,8 @@ function Footer() {
         </Suspense>{" "}
         {config.author}. {t.rights}
       </p>
+      {/* Ad, adres ve telefon Google İşletme Profili'yle aynı olmalı (config.business) */}
+      {nap && <p className="text-xs text-gray-500 dark:text-gray-400 text-center">{nap}</p>}
       <SocialMediaButtons />
       <nav className="flex gap-4 sm:gap-6 z-10">
         {footer.map((link, index) => {

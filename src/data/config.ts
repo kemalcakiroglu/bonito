@@ -3,27 +3,26 @@
 // İletişim formu mesajları `email` adresine gönderir; boş bırakılan sosyal
 // medya bağlantıları sitede gösterilmez.
 const config = {
-  title: "Bonito | Reklam Ajansı",
+  // Arama sonucunda görünen başlık (50-60 karakter) ve açıklama (~150 karakter).
+  title: "İstanbul Reklam Ajansı: Dijital Reklam ve Web | Bonito",
   description: {
-    long: "Bonito; web sitesi kurulumu, sosyal medya yönetimi, içerik üretimi, Meta ve Google reklamları, SEO ve influencer marketing hizmetlerini tek çatı altında sunan bir reklam ajansıdır.",
+    long: "İstanbul merkezli reklam ajansı: web sitesi, sosyal medya, Meta ve Google reklamları ile SEO tek ekipte. Projeleri inceleyin, teklif alın.",
     short:
-      "Dijital altyapıdan içeriğe, performans pazarlamasından SEO'ya uçtan uca reklam ajansı.",
+      "Dijital altyapıdan içeriğe, performans pazarlamasından SEO'ya İstanbul merkezli reklam ajansı.",
   },
-  keywords: [
-    "Bonito",
-    "reklam ajansı",
-    "dijital ajans",
-    "web sitesi kurulumu",
-    "e-ticaret sitesi",
-    "sosyal medya yönetimi",
-    "içerik üretimi",
-    "Meta Ads",
-    "Google Ads",
-    "performans pazarlaması",
-    "SEO",
-    "influencer marketing",
-  ],
   author: "Bonito",
+
+  // TODO(bonito): Google İşletme Profili'ndekiyle HARFİYEN aynı yazın. Boş
+  // bırakılan alanlar sitede ve yapılandırılmış veride (JSON-LD) gösterilmez.
+  // Müşteri kabul edilmeyen bir adresse sokak adresini boş bırakın.
+  business: {
+    city: "İstanbul",
+    district: "", // örn. "Kağıthane"
+    streetAddress: "", // örn. "Örnek Mah. Örnek Sok. No: 1"
+    postalCode: "",
+    phone: "", // uluslararası biçimde, örn. "+90 212 000 00 00"
+    foundingYear: "", // örn. "2025"
+  },
   email: "info@bonitoagency.com",
   site: "https://bonitoagency.com",
 

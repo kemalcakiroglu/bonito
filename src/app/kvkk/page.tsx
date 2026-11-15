@@ -4,7 +4,7 @@ import PrivacyNotice from "@/components/privacy-notice";
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni | Bonito",
   description: "Bonito web sitesinde işlenen kişisel veriler hakkında aydınlatma metni.",
-  alternates: { canonical: "/kvkk", languages: { tr: "/kvkk", en: "/en/privacy" } },
+  alternates: { canonical: "/kvkk", languages: { tr: "/kvkk", en: "/en/privacy", "x-default": "/kvkk" } },
 };
 
 export default function KvkkPage() {

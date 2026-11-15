@@ -2,7 +2,8 @@
 // `tr` ile aynı şekle sahip olmak zorundadır (tip denetimi bunu zorlar).
 const tr = {
   hero: {
-    eyebrow: "Reklam Ajansı",
+    // Sayfanın H1'i; aranan ifade ("istanbul reklam ajansı") burada geçer.
+    eyebrow: "İstanbul Reklam Ajansı",
     tagline: "Akılda kalan markalar için fikir üretiyoruz.",
     cta: "Teklif Al",
     services: "Hizmetlerimiz",
@@ -56,6 +57,21 @@ const tr = {
     desc: "Markalar ve kendi ürünlerimiz için yaptıklarımız.",
     screenshot: (title: string) => `${title} ekran görüntüsü`,
   },
+  about: {
+    title: "Hakkımızda",
+    desc: "Nasıl bir reklam ajansıyız?",
+    paragraphs: [
+      "Bonito, İstanbul merkezli bir reklam ajansıdır. Web sitesi kurulumu, sosyal medya yönetimi, içerik üretimi, Meta ve Google reklamları, SEO ve influencer marketing hizmetlerini tek bir ekipten veriyoruz. Böylece reklamı yöneten ekip, ziyaretçiyi karşılayan web sitesini ve paylaşılan içeriği de aynı hedefe göre planlıyor.",
+      "Endüstriyel yapıştırıcı üreticilerinden ambalaj e-ticaretine, sağlık alanından tasarım stüdyolarına ve perakendeye kadar farklı sektörlerdeki markalarla çalışıyoruz. Türkiye'deki markaların yanı sıra Avrupa'ya ve Almanya'ya yönelik sosyal medya hesaplarını da yönetiyoruz.",
+      "Her işe markanızı, rakiplerinizi ve hedef kitlenizi birlikte inceleyerek başlıyor, başarının neye göre ölçüleceğini en baştan belirliyoruz. Ürettiğimiz her içeriği yayından önce onayınıza sunuyor, sonuçları düzenli olarak raporluyoruz. İster tek bir hizmetle başlayın, ister hepsini birlikte yürütelim.",
+    ],
+    location: "Konum",
+    founded: "Kuruluş",
+    served: "Hizmet bölgesi",
+    servedValue: "İstanbul, Türkiye ve Avrupa",
+    email: "E-posta",
+    phone: "Telefon",
+  },
   contact: {
     titleTop: "BİRLİKTE",
     titleBottom: "ÇALIŞALIM",
@@ -105,7 +121,7 @@ export type UiText = typeof tr;
 
 const en: UiText = {
   hero: {
-    eyebrow: "Advertising Agency",
+    eyebrow: "Advertising Agency in Istanbul",
     tagline: "We create ideas for brands people remember.",
     cta: "Get a Quote",
     services: "Our Services",
@@ -158,6 +174,21 @@ const en: UiText = {
     title: "Projects",
     desc: "What we've built for brands and for our own products.",
     screenshot: (title: string) => `${title} screenshot`,
+  },
+  about: {
+    title: "About Us",
+    desc: "What kind of advertising agency are we?",
+    paragraphs: [
+      "Bonito is an advertising agency based in Istanbul. Website development, social media management, content production, Meta and Google Ads, SEO and influencer marketing all come from one team. That way, the team running your ads also plans the website that greets your visitors and the content you publish, around the same goal.",
+      "We work with brands across very different sectors: industrial adhesive manufacturers, packaging e-commerce, healthcare, design studios and retail. Besides brands in Türkiye, we manage social media accounts aimed at Europe and Germany.",
+      "Every project starts with a joint look at your brand, your competitors and your audience, and we agree up front on how success will be measured. Every piece of content goes to you for approval before it is published, and we report results regularly. Start with a single service or let us run them all together.",
+    ],
+    location: "Location",
+    founded: "Founded",
+    served: "Service area",
+    servedValue: "Istanbul, Türkiye and Europe",
+    email: "Email",
+    phone: "Phone",
   },
   contact: {
     titleTop: "LET'S WORK",

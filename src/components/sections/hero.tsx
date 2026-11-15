@@ -28,24 +28,26 @@ const HeroSection = () => {
             "pt-28 sm:pb-16 md:p-20 lg:p-24 xl:p-28"
           )}
         >
-          {!isLoading && (
-            <div className="flex flex-col">
+          {/* Sunucu HTML'inde de render edilir (arama motorları H1'i ve metni
+              görsün). Açılış ekranı bitince `key` değişir ve bölüm yeniden
+              kurulur; böylece giriş animasyonları ekran açıldıktan sonra oynar. */}
+          <div key={isLoading ? "loading" : "ready"} className="flex flex-col">
               <div>
                 <BlurIn delay={0.7}>
-                  <p
+                  <h1
                     className={cn(
-                      "md:self-start mt-4 font-medium text-md text-slate-500 dark:text-zinc-400",
+                      "md:self-start mt-4 font-sans font-medium text-md text-slate-500 dark:text-zinc-400",
                       "cursor-default sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
                     {t.hero.eyebrow}
-                  </p>
+                  </h1>
                 </BlurIn>
 
                 <BlurIn delay={1}>
-                  <h1 className="my-2">
+                  <div className="my-2">
                     <Logo className="h-20 max-w-full lg:h-24 xl:h-28" />
-                  </h1>
+                  </div>
                 </BlurIn>
                 <BlurIn delay={1.2}>
                   <p
@@ -104,7 +106,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-          )}
         </div>
         <div className="grid col-span-1"></div>
       </div>
